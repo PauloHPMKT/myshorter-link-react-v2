@@ -1,11 +1,13 @@
 import { FiLink } from "react-icons/fi";
 import { useStyle } from "../../hooks/useStyles";
+import { MainHeader } from "../../components/Header";
 
 export const Home = () => {
   const classes = useStyle();
 
   return (
     <div className="w-full h-screen bg-primary flex items-center justify-center flex-col">
+      <MainHeader />
       <div className="flex flex-col items-center">
         <div className="bg-white p-3 rounded-[100%] w-36 h-36 flex justify-center items-center">
           <FiLink size={58} />
