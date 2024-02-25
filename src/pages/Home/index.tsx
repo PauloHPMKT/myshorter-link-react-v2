@@ -1,9 +1,29 @@
 import { FiLink } from "react-icons/fi";
 import { useStyle } from "../../hooks/useStyles";
 import { MainHeader } from "../../components/Header";
+import { useState } from "react";
+import linksService from "../../services/links.service";
+import { ShortenLinkProps } from "../../types/interfaces";
+import { LinkItem } from "../../components/LinkItem";
 
 export const Home = () => {
   const classes = useStyle();
+  const [link, setLink] = useState("");
+  const [data, setData] = useState<ShortenLinkProps | null>(null);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleShortenLink = async () => {
+    try {
+      const { data } = await linksService.generateShortenLink(link);
+      console.log(data);
+
+      setData(data);
+      setShowModal(true);
+      setLink("");
+    } catch (error) {
+      alert("Ops deu erro!");
+    }
+  };
 
   return (
     <div className="w-full h-screen bg-primary flex items-center justify-center flex-col">
@@ -24,11 +44,14 @@ export const Home = () => {
           <FiLink size={24} color="#fff" className="mx-2" />
           <input
             type="text"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
             placeholder="Cole aqu sua URL"
             className="w-full h-full text-white bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] "
           />
         </div>
         <button
+          onClick={handleShortenLink}
           className="
             w-full 
             h-12 
@@ -47,6 +70,10 @@ export const Home = () => {
           Encurtar URL
         </button>
       </div>
+
+      {showModal && (
+        <LinkItem closeModal={() => setShowModal(false)} content={data} />
+      )}
     </div>
   );
 };
