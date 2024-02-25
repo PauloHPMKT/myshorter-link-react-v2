@@ -20,5 +20,10 @@ export default {
     getAllLinksSaved: async () => {
         const { data, error } = await supabase().from("shorten-link").select("*");
         return { data, error };
+    },
+
+    removeShortenLink: async (id: string) => {
+        const { error } = await supabase().from('shorten-link').delete().eq('id', id);
+        return error;
     }
 }

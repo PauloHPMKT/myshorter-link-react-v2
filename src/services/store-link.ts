@@ -17,3 +17,8 @@ export const getShortenLinks = async () => {
     const { data } = await linksService.getAllLinksSaved();
     return data;
 }
+
+export const removeShortenLink = async (id: string) => {
+    const error = await linksService.removeShortenLink(id);
+    return error;
+}

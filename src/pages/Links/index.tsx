@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getShortenLinks } from "../../services/store-link";
+import { getShortenLinks, removeShortenLink } from "../../services/store-link";
 import { Link } from "react-router-dom";
 import { FiArrowLeft, FiLink, FiTrash } from "react-icons/fi";
 import { LinkItem } from "../../components/LinkItem";
@@ -22,6 +22,11 @@ export const Links = () => {
   const handleOpenLink = (link: ShortenLinkProps) => {
     setData(link);
     setShowModal(true);
+  };
+
+  const handleRemoveShortenLink = (id: string) => {
+    removeShortenLink(id);
+    getLinks();
   };
 
   return (
@@ -60,7 +65,10 @@ export const Links = () => {
                     <FiLink size={18} color="#fff" className="mr-4" />
                     {link.long_url}
                   </button>
-                  <button className="border-none">
+                  <button
+                    onClick={() => handleRemoveShortenLink(link.id)}
+                    className="border-none"
+                  >
                     <FiTrash size={24} color="red" />
                   </button>
                 </li>
