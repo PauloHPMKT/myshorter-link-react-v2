@@ -10,6 +10,10 @@ export const saveShortenLink = async (content: ShortenLinkProps) => {
         long_url: content.long_url,
         references: content.references,
     }
-    console.log(shortenLinkContent)
     await linksService.toCreateOnSupabase(shortenLinkContent);
+}
+
+export const getShortenLinks = async () => {
+    const { data } = await linksService.getAllLinksSaved();
+    return data;
 }
