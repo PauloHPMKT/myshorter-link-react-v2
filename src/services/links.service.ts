@@ -1,3 +1,4 @@
+import { ShortenLinkProps } from "../types/interfaces";
 import { api, supabase } from "./api";
 
 export default {
@@ -7,13 +8,17 @@ export default {
         });
     },
 
-    toCreateOnSupabase: async (dataLink: any) => {
-        console.log(dataLink);
-        const { data, error, status } = await supabase().from("shorten-link").insert(dataLink);
+    toCreateOnSupabase: async (content: ShortenLinkProps) => {
+        const { data, error, status } = await supabase().from("shorten-link").insert(content);
         return {
             data,
             error,
             status
         };
+    },
+
+    getAllLinksSaved: async () => {
+        const { data, error } = await supabase().from("shorten-link").select("*");
+        return { data, error };
     }
 }
