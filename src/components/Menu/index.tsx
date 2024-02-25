@@ -16,7 +16,7 @@ export const Menu = () => {
         <FiLinkedin size={18} />
       </a>
       <Link
-        to="/"
+        to="/links"
         className="text-slate-950 bg-white py-2 px-6 rounded-md text-[18px] font-bold"
       >
         Meus Links
