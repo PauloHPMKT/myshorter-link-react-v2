@@ -1,13 +1,13 @@
 export interface ShortenLinkProps {
-    arquived: boolean;
-    created_at: Date;
+    archived: boolean;
+    created_at?: Date;
     custom_bitlinks?: any[];
     deeplinks?: any[];
     id: string;
     link: string;
     long_url: string;
     references: ShortenLink.GroupTypes;
-    tags: any[];
+    tags?: any[];
 }
 
 export namespace ShortenLink {
