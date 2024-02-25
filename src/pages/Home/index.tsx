@@ -15,7 +15,6 @@ export const Home = () => {
   const handleShortenLink = async () => {
     try {
       const { data } = await linksService.generateShortenLink(link);
-      console.log(data);
 
       setData(data);
       setShowModal(true);
