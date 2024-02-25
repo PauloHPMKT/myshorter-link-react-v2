@@ -8,17 +8,17 @@ import { LinkItem } from "../../components/LinkItem";
 
 export const Home = () => {
   const classes = useStyle();
-  const [link, setLink] = useState("");
+  const [url, setUrl] = useState("");
   const [data, setData] = useState<ShortenLinkProps | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const handleShortenLink = async () => {
     try {
-      const { data } = await linksService.generateShortenLink(link);
+      const { data } = await linksService.generateShortenLink(url);
 
       setData(data);
       setShowModal(true);
-      setLink("");
+      setUrl("");
     } catch (error) {
       alert("Ops deu erro!");
     }
@@ -43,9 +43,9 @@ export const Home = () => {
           <FiLink size={24} color="#fff" className="mx-2" />
           <input
             type="text"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            placeholder="Cole aqu sua URL"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="Cole aqui sua URL!"
             className="w-full h-full text-white bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] "
           />
         </div>
