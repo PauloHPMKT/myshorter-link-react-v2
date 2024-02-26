@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getShortenLinks, removeShortenLink } from "../../services/store-link";
 import { Link } from "react-router-dom";
-import { FiArrowLeft, FiLink, FiTrash } from "react-icons/fi";
+import { FiArrowLeft, FiLink, FiTrash, FiInbox } from "react-icons/fi";
 import { LinkItem } from "../../components/LinkItem";
 import { ShortenLinkProps } from "../../types/interfaces";
 
@@ -75,7 +75,14 @@ export const Links = () => {
               ))}
             </ul>
           ) : (
-            <div>Lista vazia</div>
+            <div className="h-[70vh] flex justify-center items-center mt-8 p-12">
+              <div>
+                <FiInbox size={150} color="#fff" />
+                <span className="text-[20px] text-white">
+                  Sua lista está vazia...
+                </span>
+              </div>
+            </div>
           )}
         </div>
         {showModal && (
