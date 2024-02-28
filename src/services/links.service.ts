@@ -17,8 +17,12 @@ export default {
         };
     },
 
-    getAllLinksSaved: async () => {
-        const { data, error } = await supabase().from("shorten-link").select("*");
+    getAllLinksSaved: async (sessionId?: string) => {
+        const { data, error } = await supabase()
+            .from("shorten-link")
+            .select("*")
+            .eq('sessionId', sessionId);
+        console.log(data)
         return { data, error };
     },
 
