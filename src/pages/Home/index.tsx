@@ -5,6 +5,8 @@ import { useState } from "react";
 import linksService from "../../services/links.service";
 import { ShortenLinkProps } from "../../types/interfaces";
 import { LinkItem } from "../../components/LinkItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Home = () => {
   const classes = useStyle();
@@ -20,7 +22,7 @@ export const Home = () => {
       setShowModal(true);
       setUrl("");
     } catch (error) {
-      alert("Ops deu erro!");
+      toast.error("Ops deu erro!");
     }
   };
 
@@ -71,8 +73,14 @@ export const Home = () => {
       </div>
 
       {showModal && (
-        <LinkItem closeModal={() => setShowModal(false)} content={data} />
+        <LinkItem
+          closeModal={() => setShowModal(false)}
+          content={data}
+          toastModal={toast}
+        />
       )}
+
+      <ToastContainer position="top-center" autoClose={2000} />
     </div>
   );
 };
