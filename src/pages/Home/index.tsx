@@ -16,13 +16,17 @@ export const Home = () => {
 
   const handleShortenLink = async () => {
     try {
-      const { data } = await linksService.generateShortenLink(url);
+      if (url === "") {
+        toast.error("Ops! Digite ou cole uma URL");
+        return;
+      }
 
+      const { data } = await linksService.generateShortenLink(url);
       setData(data);
       setShowModal(true);
       setUrl("");
     } catch (error) {
-      toast.error("Ops deu erro!");
+      if (error) toast.error("Ops deu erro!");
     }
   };
 
@@ -30,9 +34,6 @@ export const Home = () => {
     <div className="w-full h-screen bg-primary flex items-center justify-center flex-col">
       <MainHeader />
       <div className="flex flex-col items-center">
-        <div className="bg-white p-3 rounded-[100%] w-36 h-36 flex justify-center items-center">
-          <FiLink size={58} />
-        </div>
         <h1 className="text-white text-4xl font-semibold">My Shorter Link</h1>
         <span className="text-white mt-4 mb-9 text-[19px]">
           Cole a url ou link para encurtar
