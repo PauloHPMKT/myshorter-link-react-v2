@@ -1,13 +1,15 @@
 import { FiGithub, FiInstagram, FiLinkedin } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { CgMenuGridO } from "react-icons/cg";
+
+interface MenuProps {
+  showMenu: () => void;
+}
 
 const style = {
-  IconStyles: "hover:text-slate-950 transition-colors duration-300",
-  LinkStyles:
-    "text-slate-950 bg-white py-2 px-6 rounded-md text-[18px] font-bold",
+  IconStyles: "text-[#134EA8] hover:text-slate-950 transition-colors duration-300",
 };
 
-export const Menu = () => {
+export const Menu = ({ showMenu }: MenuProps) => {
   return (
     <nav className="flex gap-5 items-center text-white">
       <a href="https://www.github.com/PauloHPMKT" className={style.IconStyles}>
@@ -25,9 +27,12 @@ export const Menu = () => {
       >
         <FiLinkedin size={18} />
       </a>
-      <Link to="/links" className={style.LinkStyles}>
-        Meus Links
-      </Link>
+      <CgMenuGridO 
+        size={38} 
+        color="#121212" 
+        cursor="pointer" 
+        onClick={showMenu}
+      />
     </nav>
   );
 };
