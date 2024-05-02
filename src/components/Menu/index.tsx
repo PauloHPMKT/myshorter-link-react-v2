@@ -1,10 +1,24 @@
+import { useNavigate } from "react-router-dom";
+
 export const Menu = () => {
+  const navigate = useNavigate();
+
+  const navigateToLogin = () => {
+    navigate('/login');
+  }
+
+  const navigateToRegister = () => {
+    navigate('/register');
+  }
   return (
     <nav className="flex gap-5 items-center">
-      <button className="font-medium">
+      <button onClick={navigateToLogin} className="font-medium">
         Login  
       </button>
-      <button className="bg-primary h-[40px] px-5 rounded-2xl text-white font-medium">
+      <button 
+        onClick={navigateToRegister}
+        className="bg-primary h-[40px] px-5 rounded-2xl text-white font-medium"
+      >
         Crie sua conta
       </button>
     </nav>
