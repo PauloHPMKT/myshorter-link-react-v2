@@ -43,7 +43,7 @@ export const Home = () => {
     <>
       <MainHeader />
       <main>
-        <section className="w-[1300px] px-3 flex m-auto pt-16 pb-36">
+        <section className="w-[1300px] px-24 flex m-auto pt-16 pb-36">
           <div className="w-1/2 flex flex-col justify-center pr-14">
             <h1 className="text-6xl leading-none font-bold text-zinc-900">Mais que apenas um encurtador de links</h1>
             <p className="text-lg mt-6 text-slate-600 font-medium">
@@ -51,15 +51,14 @@ export const Home = () => {
               Projetado para ajudar a aumentar a conversão e a confiabilidade do seu negócio.
             </p>
             <div className="mt-6">
-              <p className="font-semibold">Breve você aproveitará todas as funcionalidades do Shortlify.</p>
-              {/* <button className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium">Comece gratuitamente</button> */}
+              <button className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium">Comece gratuitamente</button>
             </div>
           </div>
           <div className="w-1/2 flex justify-center items-center">
             <img src={working} alt="working" className="w-[95%]"/>
           </div>
         </section>
-        <section className="relative max-w-[1300px] m-auto py-5">
+        <section className="relative max-w-[1300px] px-24 m-auto py-5">
           <div className="absolute -bottom-14 left-1/2 -translate-x-[50%]">
             <div
               className={`w-[1000px] rounded-2xl bg-slate-500 py-10 px-10 flex items-center justify-center ${classes["animation-slideup"]}`}
@@ -106,7 +105,7 @@ export const Home = () => {
         </section>
         <footer className="bg-slate-900 flex items-center text-white">
           <div className="w-full h-full pt-14">
-            <div className="h-[90%] flex pb-10 max-w-[1300px] m-auto">
+            <div className="h-[90%] flex pb-10 max-w-[1300px] m-auto px-24">
               <div className="w-1/2">
                 <div className="w-[400px]">
                   <img src={logoWhite} alt="Logo Shortlify" className="w-[200px]"/>  
