@@ -1,0 +1,47 @@
+import { Link } from "react-router-dom";
+import logo from "../../assets/img/shortlify-removebg.png";
+import { useStyle } from "../../hooks/useStyles";
+
+export const Register = () => {
+  const classes = useStyle();
+  return (
+    <div className="h-screen">
+      <div className={`flex items-center flex-col h-screen justify-center ${classes['animation-slidedown']}`}>
+        <div className="mb-10 flex justify-center items-center flex-col">
+          <img src={logo} alt="logo Shortlify" className="w-[200px]" />
+          <div className="flex items-center">
+            <p className="text-lg mt-6 text-slate-600 font-medium">Já tem uma conta conosco?</p>
+            <Link to="/login" className="text-primary text-lg mt-6 ml-2 font-medium hover:underline">Fazer Login</Link>
+          </div>
+        </div>
+        <form className="w-[400px] flex flex-col gap-3">
+          <div>
+            <label className="text-md font-semibold">Nome</label>
+            <input
+              type="text"
+              placeholder="seu nome de usuário"
+              className="w-full h-12 rounded-md text-slate-900 border-2 placeholder-alpha-2 px-2 text-[16px] "
+            />
+          </div>
+          <div>
+            <label className="text-md font-semibold">E-mail</label>
+            <input
+              type="email"
+              placeholder="meuemail@example.com"
+              className="w-full h-12 rounded-md text-slate-900 border-2 placeholder-alpha-2 px-2 text-[16px] "
+            />
+          </div>
+          <div className="mb-2">
+            <label className="text-md font-semibold">Senha</label>
+            <input
+              type="password"
+              placeholder="Senha"
+              className="w-full h-12 rounded-md text-slate-900 border-2 placeholder-alpha-2 px-2 text-[16px] "
+            />
+          </div>
+          <button className="bg-primary h-[46px] px-5 rounded-2xl text-white font-medium">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+  )
+}
