@@ -43,7 +43,7 @@ export const Home = () => {
     <>
       <MainHeader />
       <main>
-        <section className="w-[1200px] flex m-auto pt-16 pb-36">
+        <section className="w-[1300px] px-3 flex m-auto pt-16 pb-36">
           <div className="w-1/2 flex flex-col justify-center pr-14">
             <h1 className="text-6xl leading-none font-bold text-zinc-900">Mais que apenas um encurtador de links</h1>
             <p className="text-lg mt-6 text-slate-600 font-medium">
@@ -59,39 +59,41 @@ export const Home = () => {
             <img src={working} alt="working" className="w-[95%]"/>
           </div>
         </section>
-        <section className="py-5 absolute -bottom-14 translate-x-[26%]">
-          <div
-            className={`w-[1000px] rounded-2xl bg-slate-500 py-10 px-10 flex items-center justify-center ${classes["animation-slideup"]}`}
-          >
-            <div className="w-full h-12 bg-white flex justify-center items-center rounded-md">
-              <FiLink size={24} color="#7a7777" className="mx-2" />
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="Cole aqui seu link!"
-                className="w-full h-full text-slate-900 bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] "
-              />
-            </div>
-            <button
-              onClick={handleShortenLink}
-              className="
-                h-12 
-                w-1/5
-                ml-2
-                border-none 
-                rounded-md 
-                text-white 
-                text-[16px] 
-                font-medium  
-                cursor-pointer 
-                bg-primary 
-                hover:scale-x-105 
-                transition-transform 
-                duration-700"
+        <section className="relative max-w-[1300px] m-auto py-5">
+          <div className="absolute -bottom-14 left-1/2 -translate-x-[50%]">
+            <div
+              className={`w-[1000px] rounded-2xl bg-slate-500 py-10 px-10 flex items-center justify-center ${classes["animation-slideup"]}`}
             >
-              Encurtar
-            </button>
+              <div className="w-full h-12 bg-white flex justify-center items-center rounded-md">
+                <FiLink size={24} color="#7a7777" className="mx-2" />
+                <input
+                  type="text"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="Cole aqui seu link!"
+                  className="w-full h-full text-slate-900 bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] "
+                />
+              </div>
+              <button
+                onClick={handleShortenLink}
+                className="
+                  h-12 
+                  w-1/5
+                  ml-2
+                  border-none 
+                  rounded-md 
+                  text-white 
+                  text-[16px] 
+                  font-medium  
+                  cursor-pointer 
+                  bg-primary 
+                  hover:scale-x-105 
+                  transition-transform 
+                  duration-700"
+              >
+                Encurtar
+              </button>
+            </div>
           </div>
         </section>
         <section className="bg-slate-200 pt-36 pb-20 flex justify-center text-slate-950">
@@ -104,7 +106,7 @@ export const Home = () => {
         </section>
         <footer className="bg-slate-900 flex items-center text-white">
           <div className="w-full h-full pt-14">
-            <div className="h-[90%] flex px-48 pb-10">
+            <div className="h-[90%] flex pb-10 max-w-[1300px] m-auto">
               <div className="w-1/2">
                 <div className="w-[400px]">
                   <img src={logoWhite} alt="Logo Shortlify" className="w-[200px]"/>  
