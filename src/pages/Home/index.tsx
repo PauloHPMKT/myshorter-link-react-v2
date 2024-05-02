@@ -51,7 +51,8 @@ export const Home = () => {
               Projetado para ajudar a aumentar a conversão e a confiabilidade do seu negócio.
             </p>
             <div className="mt-6">
-              <button className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium">Comece gratuitamente</button>
+              <p className="font-semibold">Breve você aproveitará todas as funcionalidades do Shortlify.</p>
+              {/* <button className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium">Comece gratuitamente</button> */}
             </div>
           </div>
           <div className="w-1/2 flex justify-center items-center">
