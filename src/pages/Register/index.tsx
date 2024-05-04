@@ -1,29 +1,25 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Spinning } from "../../components/Loaders/Spinning";
+import { Logo } from "../../components/Logo";
 import { useStyle } from "../../hooks/useStyles";
 import { useToastify } from "../../hooks/useToastify";
 import userService from "../../services/user/user.service";
-import { Spinning } from "../../components/Loaders/Spinning";
-import { Logo } from "../../components/Logo";
-
-interface toCreate {
-  name: string;
-  email: string;
-  password: string;
-}
+import { Account } from "../../types/interfaces";
 
 export const Register = () => {
   const classes = useStyle();
   const form = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const timerToCloseRequest = () => {
+  const timerToCloseRequest = (ref: React.RefObject<HTMLFormElement>) => {
     setTimeout(() => {
       setLoading(false);
+      ref && ref.current?.reset();
     }, 3000);
   }
 
-  const validateFields = (data: toCreate) => {
+  const validateFields = (data: Account.toCreate) => {
     const { name, email, password } = data;
     if (!name || !email || !password) {
       useToastify('error', 'Preencha todos os campos para continuar');
@@ -35,7 +31,7 @@ export const Register = () => {
   const handleSubmitUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const dataToCreate = {
+    const dataToCreate: Account.toCreate = {
       name: (form.current?.elements.namedItem('name') as HTMLInputElement).value,
       email: (form.current?.elements.namedItem('email') as HTMLInputElement).value,
       password: (form.current?.elements.namedItem('password') as HTMLInputElement).value,
@@ -48,12 +44,11 @@ export const Register = () => {
       const { status } = await userService.create(dataToCreate);
       if (status !== 201) {
         useToastify('error', 'Ops! Houve um erro ao criar seu usuário')
-        timerToCloseRequest();
+        timerToCloseRequest(form);
       }
 
       useToastify('success', 'Usuário criado com sucesso!');
-      timerToCloseRequest();
-      form && form.current?.reset();
+      timerToCloseRequest(form);
     } catch (error) {
       useToastify('error', 'Ops! Houve um erro ao criar o usuário')
     }

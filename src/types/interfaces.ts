@@ -15,3 +15,11 @@ export namespace ShortenLink {
         group: string;
     }
 }
+
+export namespace Account {
+    export interface toCreate {
+        name: string;
+        email: string;
+        password: string;
+    }
+}
