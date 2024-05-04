@@ -1,20 +1,19 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { FiClipboard, FiX } from "react-icons/fi";
-import { ShortenLinkProps } from "../../types/interfaces";
 import { useStyle } from "../../hooks/useStyles";
 import { saveShortenLink } from "../../services/store-link";
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ShortenLinkProps } from "../../types/interfaces";
+import { useToastify } from "../../hooks/useToastify";
 
 export interface LinkItemProps {
   closeModal: () => void;
   content: ShortenLinkProps | null;
-  toastModal: any | null;
 }
 
 export const LinkItem = ({
   closeModal,
   content,
-  toastModal,
 }: LinkItemProps) => {
   const classes = useStyle();
   const { pathname } = useLocation();
@@ -28,12 +27,12 @@ export const LinkItem = ({
   const copyLink = async () => {
     const { clipboard } = navigator;
     await clipboard.writeText(link as string);
-    toastModal.success("Link copiado com sucesso!");
+    useToastify("success", "Link copiado com sucesso!");
   };
 
   const saveURL = () => {
     saveShortenLink(content as ShortenLinkProps);
-    toastModal.success("Seu link foi salvo com sucesso!!!");
+    useToastify("success", "Seu link foi salvo com sucesso!!!");
     closeModal();
   };
 

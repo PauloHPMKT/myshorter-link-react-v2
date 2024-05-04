@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import linksService from "../../services/links.service";
 import { ShortenLinkProps } from "../../types/interfaces";
 import { LinkItem } from "../../components/LinkItem";
-import { ToastContainer, toast } from "react-toastify";
 import working from "../../assets/img/illustration-working.svg";
 import logoWhite from "../../assets/img/white-shortlify-logo.png";
-import "react-toastify/dist/ReactToastify.css";
 import { Social } from "../../components/Social";
+import { useNavigate } from "react-router-dom";
+import { useToastify } from "../../hooks/useToastify";
 
 export const Home = () => {
   const classes = useStyle();
+  const navigate = useNavigate();
   const [url, setUrl] = useState("");
   const [year, setYear] = useState<number>(0);
   const [data, setData] = useState<ShortenLinkProps | null>(null);
@@ -26,7 +27,7 @@ export const Home = () => {
   const handleShortenLink = async () => {
     try {
       if (url === "") {
-        toast.error("Ops! Digite ou cole uma URL");
+        useToastify("error", "Ops! Digite ou cole uma URL");
         return;
       }
 
@@ -35,9 +36,13 @@ export const Home = () => {
       setShowModal(true);
       setUrl("");
     } catch (error) {
-      if (error) toast.error("Ops deu erro!");
+      if (error) useToastify("error", "Ops deu erro!");
     }
   };
+
+  const navigateToRegister = () => {
+    navigate('/register');
+  }
 
   return (
     <>
@@ -51,7 +56,12 @@ export const Home = () => {
               Projetado para ajudar a aumentar a conversão e a confiabilidade do seu negócio.
             </p>
             <div className="mt-6">
-              <button className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium">Comece gratuitamente</button>
+              <button 
+                onClick={navigateToRegister}
+                className="bg-primary h-[44px] px-5 rounded-2xl text-white font-medium"
+              >
+                Comece gratuitamente
+              </button>
             </div>
           </div>
           <div className="w-1/2 flex justify-center items-center">
@@ -129,12 +139,9 @@ export const Home = () => {
             <LinkItem
               closeModal={() => setShowModal(false)}
               content={data}
-              toastModal={toast}
             />
           </div>
         )}
-
-        <ToastContainer position="top-center" autoClose={2000} />
       </main>
     </>
   );

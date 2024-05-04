@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { FiArrowLeft, FiLink, FiTrash, FiInbox } from "react-icons/fi";
 import { LinkItem } from "../../components/LinkItem";
 import { ShortenLinkProps } from "../../types/interfaces";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const Links = () => {
   const [showModal, setShowModal] = useState(false);
@@ -104,10 +102,8 @@ export const Links = () => {
           <LinkItem
             closeModal={() => setShowModal(false)}
             content={data}
-            toastModal={toast}
           />
         )}
-        <ToastContainer position="top-center" autoClose={2000} />
       </div>
     </div>
   );
