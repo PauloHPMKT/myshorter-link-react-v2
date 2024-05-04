@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useStyle } from "../../hooks/useStyles";
 import { useToastify } from "../../hooks/useToastify";
 import userService from "../../services/user/user.service";
-import logo from "../../assets/img/shortlify-removebg.png";
 import { Spinning } from "../../components/Loaders/Spinning";
+import { Logo } from "../../components/Logo";
 
 interface toCreate {
   name: string;
@@ -63,7 +63,7 @@ export const Register = () => {
     <div className="h-screen">
       <div className={`flex items-center flex-col h-screen justify-center ${classes['animation-slidedown']}`}>
         <div className="mb-10 flex justify-center items-center flex-col">
-          <img src={logo} alt="logo Shortlify" className="w-[200px]" />
+          <Logo />
           <div className="flex items-center">
             <p className="text-lg mt-6 text-slate-600 font-medium">Já tem uma conta conosco?</p>
             <Link to="/login" className="text-primary text-lg mt-6 ml-2 font-medium hover:underline">Fazer Login</Link>
