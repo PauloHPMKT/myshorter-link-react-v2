@@ -1,13 +1,8 @@
 import { apiService } from "../api"
-
-interface UserToCreate {
-  name: string;
-  email: string;
-  password: string;
-}
+import { Account } from "../../types/interfaces";
 
 export default {
-  create: (data: UserToCreate) => {
+  create: (data: Account.toCreate) => {
     return apiService.post('/users', data);
   }
 }

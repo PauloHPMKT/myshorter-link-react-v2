@@ -1,11 +1,22 @@
 import { SupabaseClient, createClient } from "@supabase/supabase-js";
 import axios from "axios";
 
-const baseURL = import.meta.env.VITE_BITLY_URL as string;
+const baseURL = import.meta.env.VITE_API_BASEURL as string;
+console.log(baseURL);
+
+const bitLiUrl = import.meta.env.VITE_BITLY_URL as string;
 const key = import.meta.env.VITE_BITLY_KEY as string;
 
-export const api = axios.create({
+export const apiService = axios.create({
     baseURL,
+    // headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${key}`,
+    // },
+});
+
+export const api = axios.create({
+    baseURL: bitLiUrl,
     headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${key}`,
