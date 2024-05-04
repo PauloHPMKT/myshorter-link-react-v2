@@ -1,8 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import { Home } from "../pages/Home";
 import { Links } from "../pages/Links";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
+import { RootLayout } from "../Layout/Default";
+import { Dashboard } from "../pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -20,5 +22,23 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/app",
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/app",
+        element: <Navigate to="/app/dashboard" />,
+      },
+      {
+        path: "/app/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/app/links",
+        element: <Links />,
+      }
+    ],
   }
 ]);
