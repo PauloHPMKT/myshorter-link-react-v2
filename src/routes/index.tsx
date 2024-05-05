@@ -5,6 +5,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import { RootLayout } from "../Layout/Default";
 import { Dashboard } from "../pages/Dashboard";
+import { RequireAuth } from "../contexts/auth/RequireAuth";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +26,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/app",
-    element: <RootLayout />,
+    element: (
+      <RequireAuth>
+        <RootLayout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/app",
