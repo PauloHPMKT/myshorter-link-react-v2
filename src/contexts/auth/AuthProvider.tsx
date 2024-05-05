@@ -21,13 +21,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     }
     validatetoken();
-  }, [userService])
+  }, [])
 
   const signin = async (email: string, password: string): Promise<boolean> => {
     const { data } = await userService.login({ email, password });
     if (data) {
-      console.log(data);
-      setUser(data);
+      setUser(data.user);
       setToken(data.access_token)
       return true;
     }
@@ -35,8 +34,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   const signout = () => {
-    console.log('Esta sendo executado')
-    userService.signout();
+    //userService.signout();
     setUser(null)
     setToken('')
   }
