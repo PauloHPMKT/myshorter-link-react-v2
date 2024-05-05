@@ -1,8 +1,15 @@
 import { apiService } from "../api"
-import { Account } from "../../types/interfaces";
+import { Account } from "../../types/Account";
 
 export default {
-  create: (data: Account.toCreate) => {
-    return apiService.post('/users', data);
-  }
+  create: async (data: Account.toCreate) => {
+    return await apiService.post('/users', data);
+  },
+  login: async (data: Account.toLogin) => {
+    return await apiService.post('/auth/login', data);
+  },
+  validadeAccess: async () => {
+    return await apiService.get('/auth/me');
+  },
+  signout: () => {}
 }
