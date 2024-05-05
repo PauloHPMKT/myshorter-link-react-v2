@@ -39,7 +39,7 @@ export const Login = () => {
         <div className="h-screen">
           <div className={`flex items-center flex-col h-screen justify-center ${classes['animation-slidedown']}`}>
             <div className="mb-10 flex justify-center items-center flex-col">
-              <Logo />
+              <Logo size="200px" />
               <div className="flex items-center">
                 <p className="text-lg mt-6 text-slate-600 font-medium">Ainda não possui conta?</p>
                 <Link to="/register" className="text-primary text-lg mt-6 ml-2 font-medium hover:underline">Crie sua conta</Link>

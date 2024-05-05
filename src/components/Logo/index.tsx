@@ -1,10 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/shortlify-removebg.png";
 
-export const Logo = () => {
+export const Logo = ({ size }: { size: string }) => {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const backToHome = () => {
+  const logoNavigation = () => {
+    if (pathname === '/app/dashboard') {
+      return navigate('/app');
+    }
     navigate('/');
   }
   
@@ -12,8 +16,8 @@ export const Logo = () => {
     <img 
       src={logo} 
       alt="logo Shortlify" 
-      onClick={backToHome}
-      className="w-[200px] cursor-pointer" 
+      onClick={logoNavigation}
+      className={`w-[${size}] cursor-pointer`} 
       title="Clique na logo para voltar a Home page"
     />
   )

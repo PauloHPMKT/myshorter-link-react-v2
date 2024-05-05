@@ -5,7 +5,7 @@ import { Logo } from "../../components/Logo";
 import { useStyle } from "../../hooks/useStyles";
 import { useToastify } from "../../hooks/useToastify";
 import userService from "../../services/user/user.service";
-import { Account } from "../../types/interfaces";
+import { Account } from "../../types/Account";
 
 export const Register = () => {
   const classes = useStyle();
@@ -58,7 +58,7 @@ export const Register = () => {
     <div className="h-screen">
       <div className={`flex items-center flex-col h-screen justify-center ${classes['animation-slidedown']}`}>
         <div className="mb-10 flex justify-center items-center flex-col">
-          <Logo />
+          <Logo size="200px" />
           <div className="flex items-center">
             <p className="text-lg mt-6 text-slate-600 font-medium">Já tem uma conta conosco?</p>
             <Link to="/login" className="text-primary text-lg mt-6 ml-2 font-medium hover:underline">Fazer Login</Link>
