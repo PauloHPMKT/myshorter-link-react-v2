@@ -27,5 +27,43 @@ export const useStyle = createUseStyles({
     "animation-slideup": {
         animation: "$slideup 0.4s ease",
     },
+    '@keyframes rotation': {
+        from: {
+            transform: 'rotate(0deg)',
+        },
+        to: {
+            transform: 'rotate(360deg)',
+        },
+    },
+    animationRotation: {
+        animation: '$rotation 0.5s linear infinite',
+    },
+    '@keyframes fade': {
+        from: {
+            opacity: 0,
+        },
+        to: {
+            opacity: 1,
+        },
+    },
+    animationFade: {
+        animation: '$fade 0.5s ease',
+    },
+    selected: {
+        borderRadius: "8px",
+        padding: "8px 15px",
+        backgroundColor: "#134EA8",
+        color: "#fff",
+        border: "2px solid #134EA8",
+    },
+    hover: {
+        transition: "0.5s ease-in-out",
+        borderRadius: "8px",
+        padding: "8px 15px",
+        border: "2px solid transparent",
+        "&:hover": {
+            border: "2px solid transparent",
+            backgroundColor: "#F3F4F6",
+        }
+    }
 });
-
