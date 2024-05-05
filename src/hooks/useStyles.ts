@@ -55,6 +55,15 @@ export const useStyle = createUseStyles({
         backgroundColor: "#134EA8",
         color: "#fff",
         border: "2px solid #134EA8",
+        "&::before": {
+            content: "'|'",
+            width: "4px",
+            height: "100%",
+            backgroundColor: "#fff",
+            marginRight: "12px",
+            marginBottom: "1px",
+            borderRadius: "4px",
+        }
     },
     hover: {
         transition: "0.5s ease-in-out",
