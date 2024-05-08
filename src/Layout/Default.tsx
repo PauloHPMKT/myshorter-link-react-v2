@@ -1,14 +1,16 @@
-import { Link, Outlet } from "react-router-dom";
-import { useStyle } from "../hooks/useStyles";
-import { Sidebar } from "../components/Menubar/Sidebar";
 import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/auth/AuthContext";
-import logo from '../assets/img/shortlify-removebg.png'
+import { Link, Outlet } from "react-router-dom";
+import { Sidebar } from "../components/Menubar/Sidebar";
 import { CardProfile } from "../components/Cards/CardProfile";
+import { AuthContext } from "../contexts/auth/AuthContext";
+import { useTruncate } from "../hooks/useTruncate";
+import { useStyle } from "../hooks/useStyles";
+import logo from '../assets/img/shortlify-removebg.png'
 
 export const RootLayout = () => {
   const classes = useStyle();
   const { user } = useContext(AuthContext);
+  const firstLatter = useTruncate(user?.name, 1)
   const [showProfileCard, setProfileCard] = useState<boolean>(false);
 
   const toggleProfileCard = () => {
@@ -37,7 +39,7 @@ export const RootLayout = () => {
         </div>
         <div onClick={toggleProfileCard} className="flex items-center cursor-pointer">
           <div className="bg-orange-600 w-10 h-10 flex justify-center items-center rounded-full text-white">
-            H
+            { firstLatter }
           </div>
           {user && (
             <div className="ml-2">{user.name}</div>
