@@ -28,7 +28,7 @@ export const Login = () => {
       }
       setLoading(false);
       navigate('/app/dashboard');
-    }, 2000)
+    }, 1500)
   }
 
   return (
