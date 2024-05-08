@@ -4,7 +4,10 @@ export const Menu = () => {
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
-    navigate('/login');
+    const token = localStorage.getItem('access_token');
+    token 
+      ? navigate('/app/dashboard')
+      : navigate('/login');
   }
 
   const navigateToRegister = () => {
