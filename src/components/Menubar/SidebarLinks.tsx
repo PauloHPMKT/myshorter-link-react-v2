@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiLinkSimpleHorizontalBold  } from "react-icons/pi";
 import { Each } from "../Each";
-import { createElement, useState } from "react";
+import { createElement, useEffect, useState } from "react";
 import { useStyle } from "../../hooks/useStyles";
 
 interface MenuProps {
@@ -29,13 +29,19 @@ const menuItems: MenuProps[] = [
 
 
 export const SidebarLinks = () => {
-  const { pathname } = useLocation();
   const classes = useStyle();
-  const [selected, setSelected] = useState<string>(
-    menuItems.includes(menuItems.find((item) => item.path === pathname) as MenuProps)
-      ? menuItems.find((item) => item.path === pathname)?.id as string
-      : "1"
-  );
+  const { pathname } = useLocation();
+  const selectionMenuItem = () => {
+    return menuItems.includes(menuItems.find((item) => item.path === pathname) as MenuProps)
+    ? menuItems.find((item) => item.path === pathname)?.id as string
+    : "1"
+  }
+
+  const [selected, setSelected] = useState<string>(selectionMenuItem());
+
+  useEffect(() => {
+    setSelected(selectionMenuItem());
+  }, [pathname])
 
   const handleSelected = (id: string) => {
     setSelected(id);
