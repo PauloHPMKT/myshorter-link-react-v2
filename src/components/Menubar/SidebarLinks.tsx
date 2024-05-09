@@ -1,9 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { RiScissorsCutFill } from "react-icons/ri";
 import { PiLinkSimpleHorizontalBold  } from "react-icons/pi";
 import { Each } from "../Each";
 import { createElement, useEffect, useState } from "react";
 import { useStyle } from "../../hooks/useStyles";
+
+
 
 interface MenuProps {
   id: string;
@@ -24,6 +27,12 @@ const menuItems: MenuProps[] = [
     name: "Meus Links",
     path: "/app/links",
     icon: () => <PiLinkSimpleHorizontalBold  size={20} />,
+  },
+  {
+    id: "3",
+    name: "Encutar links",
+    path: "/app/shorten",
+    icon: () => <RiScissorsCutFill  size={20} />,
   },
 ]
 

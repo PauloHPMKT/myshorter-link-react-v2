@@ -6,6 +6,7 @@ import { Register } from "../pages/Register";
 import { RootLayout } from "../Layout/Default";
 import { Dashboard } from "../pages/Dashboard";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
+import { Shorten } from "../pages/Shorten";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "/app/links",
         element: <Links />,
+      },
+      {
+        path: "/app/shorten",
+        element: <Shorten />,
       }
     ],
   }
