@@ -21,7 +21,7 @@ export const LinkItem = ({
   const [buttons, setButtons] = useState(true);
 
   useEffect(() => {
-    if (pathname === "/links") setButtons(false);
+    if (pathname === "/app/links") setButtons(false);
   }, []);
 
   const copyLink = async () => {
