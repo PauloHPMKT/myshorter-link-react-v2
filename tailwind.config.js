@@ -10,6 +10,9 @@ export default {
         alpha: "#ffffff26",
         "alpha-2": "#ffffffcc",
       },
+      colors: {
+        primary: "#134EA8",
+      }
     },
   },
   plugins: [],
