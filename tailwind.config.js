@@ -12,6 +12,9 @@ export default {
       },
       colors: {
         primary: "#134EA8",
+      },
+      borderColor: {
+        primary: "#134EA8"
       }
     },
   },
