@@ -49,7 +49,7 @@ export const RootLayout = () => {
       </header>
       <div className="flex mt-[70px] w-full">
         <Sidebar />
-        <main className="pl-[350px] pt-11 pr-20 bg-main w-full">
+        <main className="pl-[25%] pt-11 pr-[10%] bg-main w-full">
           <Outlet />
         </main>
       </div>
