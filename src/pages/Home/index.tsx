@@ -1,15 +1,16 @@
-import { FiLink } from "react-icons/fi";
-import { useStyle } from "../../hooks/useStyles";
-import { MainHeader } from "../../components/Header";
 import { useEffect, useState } from "react";
-import linksService from "../../services/links.service";
+import { useNavigate } from "react-router-dom";
+import { FiClipboard, FiLink, FiX } from "react-icons/fi";
+import { MainHeader } from "../../components/Header";
+import { Social } from "../../components/Social";
+import { CardLinkItem } from "../../components/LinkItem/CardItem";
 import { ShortenLinkProps } from "../../types/interfaces";
-import { LinkItem } from "../../components/LinkItem";
+import { useToastify } from "../../hooks/useToastify";
+import { useStyle } from "../../hooks/useStyles";
+import { saveShortenLink } from "../../services/store-link";
+import bitlyService from "../../services/bitly/bitly.service";
 import working from "../../assets/img/illustration-working.svg";
 import logoWhite from "../../assets/img/white-shortlify-logo.png";
-import { Social } from "../../components/Social";
-import { useNavigate } from "react-router-dom";
-import { useToastify } from "../../hooks/useToastify";
 
 export const Home = () => {
   const classes = useStyle();
@@ -31,7 +32,7 @@ export const Home = () => {
         return;
       }
 
-      const { data } = await linksService.generateShortenLink(url);
+      const { data } = await bitlyService.generateShortenLink(url);
       setData(data);
       setShowModal(true);
       setUrl("");
@@ -39,6 +40,22 @@ export const Home = () => {
       if (error) useToastify("error", "Ops deu erro!");
     }
   };
+
+  const saveURL = () => {
+    saveShortenLink(data as ShortenLinkProps);
+    useToastify("success", "Seu link foi salvo com sucesso!!!");
+    closeCardLinkItem();
+  };
+
+  const copyLink = async () => {
+    const { clipboard } = navigator;
+    await clipboard.writeText(data?.link as string);
+    useToastify("success", "Link copiado com sucesso!");
+  };
+
+  const closeCardLinkItem = () => {
+    setShowModal(false);
+  }
 
   const navigateToRegister = () => {
     navigate('/register');
@@ -86,19 +103,9 @@ export const Home = () => {
               <button
                 onClick={handleShortenLink}
                 className="
-                  h-12 
-                  w-1/5
-                  ml-2
-                  border-none 
-                  rounded-md 
-                  text-white 
-                  text-[16px] 
-                  font-medium  
-                  cursor-pointer 
-                  bg-primary 
-                  hover:scale-x-105 
-                  transition-transform 
-                  duration-700"
+                  h-12 w-1/5 ml-2 border-none rounded-md text-white text-[16px] font-medium cursor-pointer bg-primary 
+                  hover:scale-x-105 transition-transform duration-700
+                "
               >
                 Encurtar
               </button>
@@ -136,10 +143,35 @@ export const Home = () => {
         </footer>
         {showModal && (
           <div className="flex justify-center">
-            <LinkItem
-              closeModal={() => setShowModal(false)}
-              content={data}
-            />
+            <CardLinkItem.Root>
+              <CardLinkItem.Icon 
+                icon={FiX} 
+                onClick={closeCardLinkItem}
+                className="absolute top-4 right-4 cursor-pointer" 
+              />
+              <CardLinkItem.Content title="Link encurtado" longUrl={data?.long_url}>
+                {data?.link}
+                <CardLinkItem.Icon 
+                  icon={FiClipboard} 
+                  onClick={copyLink}
+                  color="#fff" 
+                /> 
+              </CardLinkItem.Content>
+              <CardLinkItem.Actions>
+                <CardLinkItem.Action 
+                  onClick={closeCardLinkItem}
+                  className="
+                    bg-white text-primary border-2 border-transparent 
+                    hover:text-blue-950 transition duration-350 ease-in-out
+                  "
+                >
+                  Cancelar
+                </CardLinkItem.Action>
+                <CardLinkItem.Action onClick={saveURL}>
+                  SalvarURL
+                </CardLinkItem.Action>
+              </CardLinkItem.Actions>
+            </CardLinkItem.Root>
           </div>
         )}
       </main>
