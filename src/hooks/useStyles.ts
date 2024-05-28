@@ -14,6 +14,19 @@ export const useStyle = createUseStyles({
     "animation-slidedown": {
         animation: "$slidedown 2s ease",
     },
+    "@keyframes swipe": {
+        from: {
+            opacity: 0,
+            transform: "translateX(-90px)",
+        },
+        to: {
+            opacity: 1,
+            transform: "translateY(0)",
+        },
+    },
+    "animation-swipe": {
+        animation: "$swipe 0.5s ease",
+    },
     "@keyframes slideup": {
         from: {
             opacity: 0,
