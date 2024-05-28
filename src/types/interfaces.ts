@@ -1,3 +1,7 @@
+export interface CreateShortenLinkProps {
+    long_url: string;
+}
+
 export interface ShortenLinkProps {
     archived: boolean;
     created_at?: Date;
