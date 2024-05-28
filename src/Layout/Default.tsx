@@ -6,6 +6,7 @@ import { AuthContext } from "../contexts/auth/AuthContext";
 import { useTruncate } from "../hooks/useTruncate";
 import { useStyle } from "../hooks/useStyles";
 import logo from '../assets/img/shortlify-removebg.png'
+import { SidebarLinks } from "../components/Menubar/SidebarLinks";
 
 export const RootLayout = () => {
   const classes = useStyle();
@@ -48,7 +49,9 @@ export const RootLayout = () => {
         </div>
       </header>
       <div className="flex mt-[70px] w-full">
-        <Sidebar />
+        <Sidebar>
+          <SidebarLinks />
+        </Sidebar>
         <main className="pl-[25%] pt-11 pr-[10%] bg-main w-full">
           <Outlet />
         </main>

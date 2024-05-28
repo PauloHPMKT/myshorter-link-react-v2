@@ -1,10 +1,17 @@
-import { SidebarLinks } from "./SidebarLinks";
+import { twMerge } from "tailwind-merge";
+import { ReactElement } from "react";
 
-export const Sidebar = () => {
+interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode | ReactElement;
+}
+
+export const Sidebar = ({ children, ...rest }: SidebarProps) => {
   return (
-    <aside className="w-[250px] fixed h-screen p-3 border-r-2 bg-white">
+    <aside 
+      { ...rest }
+      className={twMerge("w-[250px] fixed h-screen p-3 border-r-2 bg-white", rest.className)}>
       <div>
-        <SidebarLinks />
+        { children }
       </div>
     </aside>
   );
