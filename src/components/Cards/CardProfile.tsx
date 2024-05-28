@@ -26,6 +26,10 @@ export const CardProfile = () => {
     navigate('/login')
   }
 
+  const toProfile = () => {
+    navigate('/app/profile')
+  } 
+
   return (
     <div className="cursor-default absolute top-[65px] shadow-md rounded-md right-4 bg-white border-slate-100 border-2 p-4 max-w-[500px]">
       <ul>
@@ -44,7 +48,7 @@ export const CardProfile = () => {
             <p className="text-slate-400">Faça um upgrade</p>
           </div>
         </li>
-        <li className={itemListStyle}>
+        <li className={itemListStyle} onClick={toProfile}>
           <p className="ml-2">Meu perfil</p>
         </li>
         <li onClick={toSignout} className={itemListStyle}>
