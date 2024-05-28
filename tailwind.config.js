@@ -15,6 +15,9 @@ export default {
       },
       borderColor: {
         primary: "#134EA8"
+      },
+      boxShadow: {
+        '3xl': '-2px 5px 10px rgba(0, 0, 0, 0.3)',
       }
     },
   },
