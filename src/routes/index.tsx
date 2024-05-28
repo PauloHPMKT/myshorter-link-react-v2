@@ -7,6 +7,7 @@ import { RootLayout } from "../Layout/Default";
 import { Dashboard } from "../pages/Dashboard";
 import { RequireAuth } from "../contexts/auth/RequireAuth";
 import { Shorten } from "../pages/Shorten";
+import { UserProfile } from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/app/shorten",
         element: <Shorten />,
+      },
+      {
+        path: "/app/profile",
+        element: <UserProfile />,
       }
     ],
   }
