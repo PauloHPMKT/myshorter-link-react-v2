@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiClipboard, FiLink, FiX } from "react-icons/fi";
 import { MainHeader } from "../../components/Header";
 import { Social } from "../../components/Social";
 import { CardLinkItem } from "../../components/LinkItem/CardItem";
-import { ShortenLinkProps } from "../../types/interfaces";
+import { CreateShortenLinkProps, ShortenLinkProps } from "../../types/interfaces";
 import { useToastify } from "../../hooks/useToastify";
 import { useStyle } from "../../hooks/useStyles";
-import { saveShortenLink } from "../../services/store-link";
 import bitlyService from "../../services/bitly/bitly.service";
 import working from "../../assets/img/illustration-working.svg";
 import logoWhite from "../../assets/img/white-shortlify-logo.png";
+import { AuthContext } from "../../contexts/auth/AuthContext";
+import { clipboardCopy } from "../../helpers";
 
 export const Home = () => {
+  const auth = useContext(AuthContext);
   const classes = useStyle();
   const navigate = useNavigate();
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState<CreateShortenLinkProps | "">("");
   const [year, setYear] = useState<number>(0);
   const [data, setData] = useState<ShortenLinkProps | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -25,10 +27,20 @@ export const Home = () => {
     setYear(date.getFullYear());
   }, [])
 
+  const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(e.target.value as CreateShortenLinkProps | "");
+  };
+
   const handleShortenLink = async () => {
     try {
       if (url === "") {
         useToastify("error", "Ops! Digite ou cole uma URL");
+        return;
+      }
+
+      if (!/^(http|https)?:\/\//i.test(url as unknown as string)) {
+        useToastify("error", "Ops! URL inválida");
+        setUrl("");
         return;
       }
 
@@ -41,20 +53,25 @@ export const Home = () => {
     }
   };
 
-  const saveURL = () => {
-    saveShortenLink(data as ShortenLinkProps);
-    useToastify("success", "Seu link foi salvo com sucesso!!!");
-    closeCardLinkItem();
-  };
+  const saveURL = async () => {
+    if (!localStorage.getItem('access_token') || !auth.user) {
+      navigate('/login');
+      return;
+    }
 
-  const copyLink = async () => {
-    const { clipboard } = navigator;
-    await clipboard.writeText(data?.link as string);
-    useToastify("success", "Link copiado com sucesso!");
+    const { status } = await bitlyService.saveShortenLink(data as ShortenLinkProps);
+    if (status !== 201) {
+      useToastify("error", "Ops! Houve um erro ao salvar seu link");
+      return;
+    }
+
+    useToastify("success", "Seu link foi salvo com sucesso!!!");
+    navigate('/app/links');
   };
 
   const closeCardLinkItem = () => {
     setShowModal(false);
+    setData(null);
   }
 
   const navigateToRegister = () => {
@@ -94,10 +111,10 @@ export const Home = () => {
                 <FiLink size={24} color="#7a7777" className="mx-2" />
                 <input
                   type="text"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
+                  value={url as string}
+                  onChange={handleUrlChange}
                   placeholder="Cole aqui seu link!"
-                  className="w-full h-full text-slate-900 bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] "
+                  className="w-full h-full text-slate-900 bg-transparent border-none outline-none placeholder-alpha-2 text-[19px] pr-2"
                 />
               </div>
               <button
@@ -137,7 +154,7 @@ export const Home = () => {
               </div>
             </div>
             <div className="h-[10%] p-6 flex justify-center">
-              <p>© {year} Shortlify, Inc. All rights reserved.</p>
+              <p>Shortlify, {year}. All rights reserved to Bitly Inc. ©</p>
             </div>
           </div>
         </footer>
@@ -153,7 +170,7 @@ export const Home = () => {
                 {data?.link}
                 <CardLinkItem.Icon 
                   icon={FiClipboard} 
-                  onClick={copyLink}
+                  onClick={() => clipboardCopy(data?.link as string)}
                   color="#fff" 
                 /> 
               </CardLinkItem.Content>
