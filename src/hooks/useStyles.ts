@@ -65,9 +65,9 @@ export const useStyle = createUseStyles({
     selected: {
         borderRadius: "8px",
         padding: "8px 15px",
-        backgroundColor: "#134EA8",
+        backgroundColor: "#73A4A9",
         color: "#fff",
-        border: "2px solid #134EA8",
+        border: "2px solid #73A4A9",
         "&::before": {
             content: "'|'",
             width: "4px",
