@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { getShortenLinks, removeShortenLink } from "../../services/store-link";
-import { FiLink, FiTrash, FiInbox, FiClipboard, FiCalendar, FiArrowDown } from "react-icons/fi";
-import { LinkItem } from "../../components/LinkItem";
+import { FiLink, FiInbox, FiClipboard, FiCalendar, FiArrowDown } from "react-icons/fi";
 import { ShortenLinkProps } from "../../types/interfaces";
 import { FaSortAmountDown } from "react-icons/fa";
+import { CiMenuKebab } from "react-icons/ci";
+import { CardActions } from "../../components/Cards/CardActions";
+import { clipboardCopy } from "../../helpers";
+import { TemplatePageItem } from "..";
 
 export const Links = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showCardAction, setShowCardAction] = useState(false);
+  const [selectedLinkId, setSelectedLinkId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [myLinks, setMyLinks] = useState<ShortenLinkProps[] | null>(null);
-  const [data, setData] = useState<ShortenLinkProps | null>(null);
 
   useEffect(() => {
     getLinks();
@@ -22,23 +25,30 @@ export const Links = () => {
     setIsLoading(false);
   };
 
-  const handleOpenLink = (link: ShortenLinkProps) => {
-    setData(link);
-    setShowModal(true);
-  };
-
   const handleRemoveShortenLink = (id: string) => {
     removeShortenLink(id);
     getLinks();
   };
+
+  const handleOpenCardActions = (id: string) => {
+    setSelectedLinkId(id);
+    setShowCardAction(!showCardAction);
+  }
 
   const formatLink = (link: string) => {
     const regex = /(https|http):\/\//;
     return link.replace(regex, '');
   }
 
+  const formatLongUrl = (link: string) => {
+    const regex = /^(https|http):\/\/([^/]+)\/.*$/;
+    const match = link.match(regex);
+    return match ? match[2] : '';
+  }
+
+
   return (
-    <div className="min-h-[90vh]">
+    <TemplatePageItem.Root>
       <div className="flex justify-between w-full">
         <div className="pb-11 border-slate-100">
           <h1 className="text-3xl font-bold">Meus Links</h1>
@@ -77,7 +87,7 @@ export const Links = () => {
                     <div className="w-[70%]">
                       <div className="flex items-center">
                         <FiLink size={20} className="mr-4" />
-                        <h3 className="text-2xl font-semibold mb-2">Titulo</h3>
+                        <h3 className="text-2xl font-semibold mb-2">{formatLongUrl(link.long_url)}</h3>
                       </div>
                       <div className="flex">
                         <div className="flex flex-col">
@@ -97,21 +107,27 @@ export const Links = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex w-[30%] justify-end">
+                    <div className="flex w-[30%] justify-end relative">
                       <div className="flex h-9 gap-3">
                         <button 
-                          onClick={() => handleOpenLink(link)}
+                          onClick={() => clipboardCopy(link.link)}
                           className="flex items-center bg-gray-300 px-[5px] h-8  rounded-md"
                         >
                           <FiClipboard size={16} color="#000" className="mr-2" />
                           Copiar
                         </button>
-                        <button
-                          onClick={() => handleRemoveShortenLink(link.id)}
-                          className="border-none"
+                        <button 
+                          onClick={() => handleOpenCardActions(link.id)}
+                          className="flex items-center bg-gray-300 px-[10px] h-8 justify-center rounded-md"
                         >
-                          <FiTrash size={24} color="red" />
+                          <CiMenuKebab size={16} color="#000" />
                         </button>
+                        {showCardAction && selectedLinkId === link.id && (
+                          <CardActions
+                            removeShortenLink={() => handleRemoveShortenLink(link.id)}
+                            />
+                          )}
+                          {/* handleClose={() => setShowCardAction(false)} */}
                       </div>
                     </div>
                   </li>
@@ -130,12 +146,6 @@ export const Links = () => {
           </div>
         )}
       </div>
-      {showModal && (
-        <LinkItem
-          closeModal={() => setShowModal(false)}
-          content={data}
-        />
-      )}
-    </div>
+    </TemplatePageItem.Root>
   );
 };

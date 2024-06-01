@@ -48,11 +48,11 @@ export const RootLayout = () => {
           {showProfileCard && <CardProfile />}
         </div>
       </header>
-      <div className="flex mt-[70px] w-full">
+      <div className="flex mt-[70px] w-full bg-red-900">
         <Sidebar>
           <SidebarLinks />
         </Sidebar>
-        <main className="pl-[25%] pt-11 pr-[10%] bg-main w-full">
+        <main className="pl-[25%] py-11 pr-[10%] bg-main w-full">
           <Outlet />
         </main>
       </div>
