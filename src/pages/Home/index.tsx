@@ -84,7 +84,7 @@ export const Home = () => {
       <main>
         <section className={`w-[1300px] px-24 flex m-auto pt-16 pb-36 ${classes["animation-slidedown"]}`}>
           <div className="w-1/2 flex flex-col justify-center pr-14">
-            <h1 className="text-6xl leading-none font-bold text-zinc-900">Mais que apenas um encurtador de links</h1>
+            <h1 className="text-[55px] leading-tight font-extrabold text-zinc-900">Mais que apenas um encurtador de links</h1>
             <p className="text-lg mt-6 text-slate-600 font-medium">
               Compartilhe links com segurança e confiança com o Shortlify. 
               Projetado para ajudar a aumentar a conversão e a confiabilidade do seu negócio.
